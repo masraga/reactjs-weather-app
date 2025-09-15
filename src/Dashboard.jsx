@@ -35,7 +35,7 @@ export default function Dashboard() {
 					</div>
 					<div className='mt-6'>
 						<span className='text-lg text-gray-700'>Senin,</span>
-						<span className='text-lg text-gray-200'>16:00</span>
+						<span className='text-lg text-gray-400'>16:00</span>
 					</div>
 					{/* .info cuaca */}
 				</div>
