@@ -28,7 +28,7 @@ export default function Dashboard() {
 			await getCurrentWeather();
 		}
 		fetchData();
-	}, []);
+	});
 
 	const getCurrentWeather = async () => {
 		const apiCity = await searchCity(city);
