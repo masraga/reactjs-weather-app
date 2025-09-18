@@ -23,13 +23,14 @@ export default function Dashboard() {
 		dt: new Date().getTime(),
 	});
 
-	const handleSearch = (e) => {
-		setCity(e.target.value.toUpperCase());
-	};
+	React.useEffect(() => {
+		async function fetchData() {
+			await getCurrentWeather();
+		}
+		fetchData();
+	}, []);
 
-	const handleSubmit = async (e) => {
-		e.preventDefault();
-		setCity("Loading...");
+	const getCurrentWeather = async () => {
 		const apiCity = await searchCity(city);
 		if (apiCity.length === 0) {
 			setCity("Kota tidak ditemukan");
@@ -44,6 +45,7 @@ export default function Dashboard() {
 		setWeather({
 			condition: MAP_WEATHER_TO_IMAGE[currentWheater],
 			temperature: temperature,
+			dt: weather.dt * 1000,
 		});
 
 		const forecast = await getForecast(lat, lon);
@@ -55,6 +57,16 @@ export default function Dashboard() {
 			};
 		});
 		setForecast(listForecast);
+	};
+
+	const handleSearch = (e) => {
+		setCity(e.target.value.toUpperCase());
+	};
+
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		setCity("Loading...");
+		await getCurrentWeather();
 	};
 
 	return (
